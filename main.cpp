@@ -49,7 +49,6 @@ string ReplaceAll(string str, const string from, const string to, int* count)
 string ReadFileToStringBuffer(string filename)
 {
 	assert(FileExists(filename));
-	//ifstream src("test.txt");
 	fstream src(filename, ios::binary | ios::out | ios::in);
 	string buffer;
 	buffer.assign((istreambuf_iterator<char>(src)), (istreambuf_iterator<char>()));
@@ -70,8 +69,6 @@ int CountSubstrings(const string str, const string sub)
 
 int main(int argc, char** argv)
 {
-	//char* argv[4] = { "", "test.txt", "FAKE", "REAL" };
-	//argc = 4;
 	string selfLocation = argv[0];
 	vector<string> args;
 
@@ -113,7 +110,7 @@ int main(int argc, char** argv)
 		}
 		if (success)
 		{
-			// Check for string to be replaced and replacement string
+			// Checks for string to be replaced and replacement string
 			stringToReplace = args[1];
 			if (stringToReplace.empty())
 			{
@@ -138,9 +135,8 @@ int main(int argc, char** argv)
 	if (success)
 	{
 		string buffer = ReadFileToStringBuffer(readFile);
-		//buffer.append(ReadFileToStringBuffer(readFile));
 
-		// -nb => no backup
+		// -nb => No backup
 		if (!IsInStringVector("-nb", args))
 		{
 			ofstream dst(backupFile, ios::binary);
@@ -148,6 +144,7 @@ int main(int argc, char** argv)
 			dst.close();
 		}
 
+		// -t => Test run, no changes made
 		int occurrences = 0;
 		if (!IsInStringVector("-t", args))
 		{
@@ -160,9 +157,9 @@ int main(int argc, char** argv)
 		dst << buffer;
 		dst.close();
 
+		// -v => Verbose output for more information
 		if (IsInStringVector("-v", args))
 		{
-			// Verbose output - For more information and debugging
 			cout << "Arguments given: " << args.size() << endl;
 			cout << "Arguments: ";
 			for (auto it = args.begin(); it != args.end(); it++)
@@ -176,7 +173,7 @@ int main(int argc, char** argv)
 	else
 	{
 		cout << error << endl << endl;
-		// Show help, because something went wrong
+		// Show help, because command probably wasn't invoked correctly
 		cout << "Usage: " << argv[0] << " [file] [string] [replacement] <optional params>" << endl << endl;
 		cout << "Optional parameters:" << endl;
 		cout << "\t-t\tTest run, don't make any changes-" << endl;
