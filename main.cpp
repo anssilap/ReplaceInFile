@@ -180,6 +180,5 @@ int main(int argc, char** argv)
 		cout << "\t-nb\tNo backup. Skips making backup file before making changes." << endl;
 		cout << "\t-v\tVerbose. Gives some extra information about what happens during the process." << endl;
 	}
-
 	return 0;
 }
