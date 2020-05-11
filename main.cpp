@@ -65,6 +65,7 @@ int CountSubstrings(const string str, const string sub)
 	{
 		++count;
 	}
+	return count;
 }
 
 int main(int argc, char** argv)
